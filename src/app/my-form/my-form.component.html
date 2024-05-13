@@ -1,0 +1,48 @@
+<form #myForm="ngForm" (ngSubmit)="myForm.valid && onSubmit()" >
+    <div>
+        Form submitted ? {{myForm.submitted}}
+        Form valid ? {{myForm.valid}}
+        Form invalid ? {{myForm.invalid}}
+    </div>
+    <fieldset>
+        <label for="title-order">Title</label>
+        <input type="text" id="title-order" name="title-order" [(ngModel)]="newOrder.title" #title="ngModel" required minlength="5">
+    </fieldset>
+
+    <div *ngIf="title.errors">
+        <span *ngIf="title.errors?.['required']">Le titre est requis</span>
+        <span *ngIf="title.errors?.['minlength']">Le titre est trop court</span>
+    </div>
+
+    <fieldset>
+        <label for="quantity-order">Quantité</label>
+        <input type="number" id="quantity-order" name="quantity-order" [(ngModel)]="newOrder.quantity" #quantity="ngModel" required min="1">
+    </fieldset>
+
+    <div *ngIf="quantity.errors">
+        <span *ngIf="quantity.errors?.['required']">Le champs quantité est requis</span>
+        <span *ngIf="quantity.errors?.['min']">La quantité doit être minmum à 1</span>
+    </div>
+    
+    <fieldset>
+        <label for="date-order">Date de commande</label>
+        <input type="date" id="date-order" name="date-order" [(ngModel)]="newOrder.date" #date="ngModel" required>
+    </fieldset>
+
+    <div *ngIf="date.errors">
+        <span *ngIf="date.errors?.['required']">Le champs date est requis</span>
+    </div>
+
+    <fieldset>
+        <label for="contact-order">Contact</label>
+        <input type="email" id="contact-order" name="contact-order" [(ngModel)]="newOrder.contact" #contact="ngModel" required>
+    </fieldset>
+
+    <div *ngIf="contact.errors">
+        <span *ngIf="contact.errors?.['required']">Le champs email est requis</span>
+        <span *ngIf="contact.errors?.['email']">L'adresse email doit être valide</span>
+    </div>
+
+    <button type="reset">Restaurer</button>
+    <button type="submit">Sauvegarder</button>
+</form>

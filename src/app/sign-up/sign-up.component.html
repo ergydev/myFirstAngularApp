@@ -1,1 +1,48 @@
 <h2>Sign Up</h2>
+
+<h2>Sign Up</h2>
+
+<form #signInForm="ngForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <label for="email">Email</label>
+        <input type="email" required email [(ngModel)]="newForm.email" #email="ngModel" id="email" name="email">
+    </fieldset>
+    <div *ngIf="submitted && email.errors">
+        <span *ngIf="email.errors?.['required']">L'adresse mail est requise</span>
+        <span *ngIf="email.errors?.['email']">L'adresse mail est invalide</span>
+    </div>
+    
+    <fieldset>
+        <label for="firstname">First Name:</label>
+        <input type="text" required id="firstname" minlength="3" maxlength="15" [(ngModel)]="newForm.firstName" #firstName="ngModel" name="firstname">
+    </fieldset>
+
+    <div *ngIf="submitted && firstName.errors">
+        <span *ngIf="firstName.errors?.['required']">Le prénom est requis</span>
+        <span *ngIf="firstName.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères.</span>
+        <span *ngIf="firstName.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères.</span>
+    </div>
+    
+    <fieldset>
+        <label for="lastName">Last Name:</label>
+        <input type="text" required id="lastName" [(ngModel)]="newForm.lastName" #lastName="ngModel" minlength="3" maxlength="15" name="lastname">
+    </fieldset>
+
+    <div *ngIf="submitted && lastName.errors">
+        <span *ngIf="lastName.errors?.['required']">Le nom est requis</span>
+        <span *ngIf="lastName.errors?.['minlength']">Le nom doit comporter au moins 3 caractères.</span>
+        <span *ngIf="lastName.errors?.['maxlength']">Le nom ne doit pas dépasser 15 caractères.</span>
+    </div>
+    
+    <fieldset>
+        <label for="password">Password:</label>
+        <input type="text" required id="password" [(ngModel)]="newForm.password" #password="ngModel" name="password">
+    </fieldset>
+
+    <div *ngIf="submitted && password.errors">
+        <span *ngIf="password.errors?.['required']">Le mot de passe est requis</span>
+    </div>
+
+    <button type="submit">SIGN IN</button>
+</form>
+
